@@ -60,7 +60,7 @@ npm install &>>$LOGFILE
 VALIDATE $? "Installing dependencies"
 
 # give full path of catalogue.service because we are inside /app
-cp E:\Devops_Shiva\Github\repos\RoboShop\Catalogue.service /etc/systemd/system/catalogue.service &>>$LOGFILE
+cp Catalogue.service /etc/systemd/system/catalogue.service &>>$LOGFILE
 
 VALIDATE $? "copying catalogue.service"
 

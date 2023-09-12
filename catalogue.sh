@@ -79,7 +79,7 @@ systemctl start catalogue &>>LOGFILE
 
 VALIDATE $? "Starting catalogur"
 
-cp E:\Devops_Shiva\Github\repos\RoboShop\Catalogue.service /etc/yum.repos.d/mongo.repo &>>LOGFILE
+cp E:\Devops_Shiva\Github\repos\RoboShop\mongo.repo /etc/yum.repos.d/mongo.repo &>>LOGFILE
 
 VALIDATE $? "Copying mongo repo"
 

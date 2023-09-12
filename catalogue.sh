@@ -39,9 +39,26 @@ VALIDATE $? "Installing NodeJS"
 # this command will defnitely fail
 # IMPROVEMENT: first check the user already exist or not, if not exist then create
 useradd roboshop &>>$LOGFILE
+if id "roboshop" &>/dev/null; then
+    echo "User 'roboshop' already exists."
+else
+    echo "User 'roboshop' does not exist. Creating..."
+    sudo useradd roboshop
+    echo "User 'roboshop' created successfully."
+fi
 
 #write a condition to check directory already exist or not
 mkdir /app &>>$LOGFILE
+directory="/app"
+
+# Check if the directory exists
+if [ -d "$directory" ]; then
+    echo "Directory '$directory' already exists."
+else
+    echo "Directory '$directory' does not exist. Creating..."
+    mkdir -p "$directory"
+    echo "Directory '$directory' created successfully."
+fi
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
@@ -76,7 +93,7 @@ systemctl start catalogue &>>$LOGFILE
 
 VALIDATE $? "Starting Catalogue"
 
-cp E:\Devops_Shiva\Github\repos\RoboShop\mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 
 VALIDATE $? "Copying mongo repo"
 

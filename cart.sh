@@ -60,47 +60,35 @@ else
     echo "Directory '$directory' created successfully."
 fi
 
-curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGFILE
 
-VALIDATE $? "downloading user artifact"
+VALIDATE $? "downloading cart artifact"
 
 cd /app &>>$LOGFILE
 
 VALIDATE $? "Moving into app directory"
 
-unzip /tmp/user.zip &>>$LOGFILE
+unzip /tmp/cart.zip &>>$LOGFILE
 
-VALIDATE $? "unzipping user"
+VALIDATE $? "unzipping cart"
 
 npm install &>>$LOGFILE
 
 VALIDATE $? "Installing dependencies"
 
-# give full path of user.service because we are inside /app
-cp user.service /etc/systemd/system/user.service &>>$LOGFILE
+# give full path of cart.service because we are inside /app
+cp /home/centos/RoboShop/cart.service /etc/systemd/system/cart.service &>>$LOGFILE
 
-VALIDATE $? "copying user.service"
+VALIDATE $? "copying cart.service"
 
 systemctl daemon-reload &>>$LOGFILE
 
 VALIDATE $? "daemon reload"
 
-systemctl enable user &>>$LOGFILE
+systemctl enable cart &>>$LOGFILE
 
-VALIDATE $? "Enabling user"
+VALIDATE $? "Enabling cart"
 
-systemctl start user &>>$LOGFILE
+systemctl start cart &>>$LOGFILE
 
-VALIDATE $? "Starting user"
-
-cp /home/centos/RoboShop/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
-
-VALIDATE $? "Copying mongo repo"
-
-yum install mongodb-org-shell -y &>>$LOGFILE
-
-VALIDATE $? "Installing mongo client"
-
-mongo --host mongodb.kpdigital.online </app/schema/user.js &>>$LOGFILE
-
-VALIDATE $? "loading user data into mongodb"
+VALIDATE $? "Starting cart"

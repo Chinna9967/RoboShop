@@ -26,23 +26,23 @@ VALIDATE(){
     fi
 }
 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>LOGFILE
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
 
 VALIDATE $? "Setting up of NPM Source"
 
-yum install nodejs -y &>>LOGFILE
+yum install nodejs -y &>>$LOGFILE
 
 VALIDATE $? "Installing Nodejs"
 
 # once the user is created, if you run this script for the second time
 # this cmd will fail
 # improvement: first check user is already exist or not , if not exist then create
-useradd roboshop &>>LOGFILE
+useradd roboshop &>>$LOGFILE
 
 # VALIDATE $? "Setting up of NPM Source"
 
 # write a condition to check directory is existed or not
-mkdir /app &>>LOGFILE
+mkdir /app &>>$LOGFILE
 
 # VALIDATE $? "Setting up of NPM Source"
 
@@ -50,15 +50,15 @@ curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zi
 
 VALIDATE $? "Downloading catalogue artifact"
 
-cd /app &>>LOGFILE
+cd /app &>>$LOGFILE
 
 VALIDATE $? "Moving into app direcctory"
 
-unzip /tmp/catalogue.zip &>>LOGFILE
+unzip /tmp/catalogue.zip &>>$LOGFILE
 
 VALIDATE $? "Unzipiing catalogue"
 
-npm install &>>LOGFILE
+npm install &>>$LOGFILE
 
 VALIDATE $? "Installing dependencies"
 
@@ -67,15 +67,15 @@ cp E:\Devops_Shiva\Github\repos\RoboShop\Catalogue.service /etc/systemd/system/c
 
 VALIDATE $? "Copying catalogue.service"
 
-systemctl daemon-reload &>>LOGFILE
+systemctl daemon-reload &>>$LOGFILE
 
 VALIDATE $? "deamon reload"
 
-systemctl enable catalogue &>>LOGFILE
+systemctl enable catalogue &>>$LOGFILE
 
 VALIDATE $? "Enabling catalogue"
 
-systemctl start catalogue &>>LOGFILE
+systemctl start catalogue &>>$LOGFILE
 
 VALIDATE $? "Starting catalogur"
 
@@ -83,7 +83,7 @@ cp E:\Devops_Shiva\Github\repos\RoboShop\mongo.repo /etc/yum.repos.d/mongo.repo 
 
 VALIDATE $? "Copying mongo repo"
 
-yum install mongodb-org-shell -y &>>LOGFILE
+yum install mongodb-org-shell -y &>>$LOGFILE
 
 VALIDATE $? "Installing mongo client"
 

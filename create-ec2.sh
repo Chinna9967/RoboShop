@@ -7,7 +7,7 @@ SECURITY_GROUP_ID=sg-0815d9222e91b557e
 # if mysql or mongodb instance_type should be t3.micro, for all others it is t2.micro
 for i in "${NAMES[@]}"
 do 
-    if [ [ $i == "MongoDB" || $i == "MySQL" ] ]
+    if [[ $i == "MongoDB" || $i == "MySQL" ]]
     then    
         INSTANCE_TYPE="t3.medium"
     else 

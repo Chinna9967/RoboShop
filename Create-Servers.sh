@@ -1,12 +1,12 @@
 #!/bin/bash
 
-NAMES=("web" "MongoDB" "catalogue" "redis" "user" "MySQL" "cart" "shipping" "RabbitMQ" "Payments" "Dispatch")
+NAMES=$@
 INSTANCE_TYPE=""
 IMAGE_ID=ami-03265a0778a880afb
 SECURITY_GROUP_ID=sg-0815d9222e91b557e
 DOMAIN_NAME=kpdigital.online
 # if mysql or mongodb instance_type should be t3.micro, for all others it is t2.micro
-for i in "${NAMES[@]}"
+for i in $@
 do 
     if [[ $i == "MongoDB" || $i == "MySQL" ]]
     then    

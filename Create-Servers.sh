@@ -3,7 +3,7 @@
 NAMES=$@
 INSTANCE_TYPE=""
 IMAGE_ID=ami-03265a0778a880afb
-SECURITY_GROUP_ID=sg-0815d9222e91b557e
+SECURITY_GROUP_ID=sg-0a9d9f8c0e0e2883c
 DOMAIN_NAME=kpdigital.online
 HOSTED_ZONE_ID=Z095807329CO3J3GHJQT7
 # if mysql or mongodb instance_type should be t3.micro, for all others it is t2.micro

@@ -101,6 +101,6 @@ yum install mongodb-org-shell -y &>>$LOGFILE
 
 VALIDATE $? "Installing mongo client"
 
-mongo --host mongodb.kpdigital.online </app/schema/catalogue.js &>>$LOGFILE
+mongo --host mongodb.kpdigital.online < /app/schema/catalogue.js &>>$LOGFILE
 
 VALIDATE $? "loading catalogue data into mongodb"
